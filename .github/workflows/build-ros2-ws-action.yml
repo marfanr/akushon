@@ -49,10 +49,28 @@ jobs:
           repository: ichiro-its/tachimawari_interfaces
           path: tachimawari_interfaces
 
-      - name: Setup grpc      
-        uses: eWaterCycle/setup-grpc@v5
-        with:
-          grpc-version: 1.51.1
+      - name: Setup cmake
+        working-directory: cmake
+        run: |
+          sudo apt install -y build-essential autoconf libtool pkg-config cmake
+
+      - name: Setup abseil for grpc      
+        working-directory: abseil
+        run: |
+          git clone https://github.com/abseil/abseil-cpp.git
+          mkdir -p abseil-cpp/build && cd  abseil-cpp/build
+          cmake ..
+          make -j 4
+          sudo make install
+      
+      - name: Setup grpc
+        working-directory: grpc
+        run: |
+          git clone --recurse-submodules -b v1.61.0 --depth 1 --shallow-submodules https://github.com/grpc/grpc
+          mkdir -p grpc/build && cd grpc/build
+          cmake -DgRPC_INSTALL=ON -DgRPC_BUILD_TESTS=OFF ..
+          make -j 4
+          sudo make install          
         
       - name: Setup workspace
         uses: ichiro-its/ros2-ws-action/setup@v1.0.1

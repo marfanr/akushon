@@ -6,7 +6,7 @@ on:
     branches: [master]
   workflow_run:
     workflows: [Build and Test Nightly]
-    types:  [requested, completed]
+    types:  [requested, completed, in_progress]
     branches: [feature/fix-github-actions]
 jobs:
   build-and-test:

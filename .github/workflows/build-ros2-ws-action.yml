@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   pull_request:
   push:
-    branches: [master]
+    branches: [master, feature/fix-github-actions]
   workflow_run:
     workflows: [Build and Test Nightly]
     types:  [requested, completed, in_progress]

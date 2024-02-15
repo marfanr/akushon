@@ -48,6 +48,11 @@ jobs:
           repository: ichiro-its/tachimawari_interfaces
           path: tachimawari_interfaces
 
+      - name: Setup grpc      
+        uses: eWaterCycle/setup-grpc@v5
+        with:
+          grpc-version: 1.51.1
+        
       - name: Setup workspace
         uses: ichiro-its/ros2-ws-action/setup@v1.0.1
 

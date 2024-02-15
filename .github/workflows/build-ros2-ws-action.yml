@@ -67,7 +67,12 @@ jobs:
           mkdir -p grpc/build && cd grpc/build
           cmake -DgRPC_INSTALL=ON -DgRPC_BUILD_TESTS=OFF ..
           make -j 4
-          sudo make install          
+          sudo make install 
+
+      - name: remove grpc and abseil clone folders
+        run: |
+          rm -rf grpc
+          rm -rf abseil-cpp 
         
       - name: Setup workspace
         uses: ichiro-its/ros2-ws-action/setup@v1.0.1
